@@ -6,5 +6,5 @@ import rs.dp.sa.centar.entity.ClanskaKarta;
 
 @Repository
 public interface ClanskaKartaRepository extends JpaRepository<ClanskaKarta, Long> {
-    boolean existByKorisnikKorisnikId(Long korisnikId);
+    boolean existsByKorisnikKorisnikId(Long korisnikId);
 }

@@ -26,7 +26,7 @@ public class ClanskaKartaService {
         Korisnik k = kRepository.findById(request.korisnikId())
                 .orElseThrow(() -> new RuntimeException("Korisnik ne postoji"));
 
-        if(ckRepository.existByKorisnikKorisnikId(k.getKorisnikId())){
+        if(ckRepository.existsByKorisnikKorisnikId(k.getKorisnikId())){
             throw new RuntimeException("Korisnik vec ima clansku kartu");
         }
 
