@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CentarApplication {
+public class CentarApp {
 
-	public static void main(String[] args) {
-		SpringApplication.run(CentarApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(CentarApp.class, args);
+    }
 
 }
