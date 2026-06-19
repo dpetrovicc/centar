@@ -38,4 +38,14 @@ public class RezervacijaTerminaController {
         }
     }
 
+    @PutMapping("/{id}/cancel")
+    public ResponseEntity<Object> cancel(@PathVariable Long id){
+        try {
+            RezervacijaTerminaResponse response = rtService.cancel(id);
+            return ResponseEntity.status(HttpStatus.OK).body(response);
+        }catch (Exception e){
+            return  ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
 }

@@ -67,4 +67,24 @@ public class RezervacijaTerminaService {
 
 
     }
+
+    @Transactional
+    public RezervacijaTerminaResponse cancel(Long id){
+        RezervacijaTermina rez = rtRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Ne posotoji rezervacija sa ovim ID-em u bazi"));
+
+        rez.setOdobreno("OTKAZANO");
+
+        RezervacijaTermina nova = rtRepository.save(rez);
+
+        return new RezervacijaTerminaResponse(
+                nova.getRezervacijaId(),
+                nova.getDatum(),
+                nova.getUkupnaCena(),
+                nova.getOdobreno(),
+                nova.getKorisnik().getKorisnikId(),
+                nova.getSportskiCentar().getSportskiCentarId()
+        );
+
+    }
 }
