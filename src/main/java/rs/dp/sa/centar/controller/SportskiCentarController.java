@@ -5,12 +5,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import rs.dp.sa.centar.entity.SportskiCentar;
 import rs.dp.sa.centar.repository.SportskiCentarRepository;
+
+import java.util.List;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -28,5 +27,16 @@ public class SportskiCentarController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
+    }
+
+    @GetMapping
+    public ResponseEntity<Object> findAll(){
+        try {
+            List<SportskiCentar> scs = scRepository.findAll();
+            return ResponseEntity.status(HttpStatus.OK).body(scs);
+        }catch(Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+
     }
 }
