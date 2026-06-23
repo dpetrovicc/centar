@@ -14,13 +14,35 @@ import rs.dp.sa.centar.repository.KorisnikRepository;
 import java.time.LocalDate;
 import java.util.Date;
 
+/**
+ * Servis klasa za upravljanje clanskim kartama
+ * Sadrzi logiku za kreiranje clanske karte
+ *
+ * @author Dusan Petrovic
+ */
 @Slf4j
 @AllArgsConstructor
 @Service
 public class ClanskaKartaService {
+    /**
+     * Repozitorijum za rad sa podacima o clanskim kartama u bazi
+     */
     private final ClanskaKartaRepository ckRepository;
+    /**
+     * Repozitorijum za rad sa podacima o korisnicima u bazi
+     */
     private  final KorisnikRepository kRepository;
 
+    /**
+     * Kreiranje nove clanske karte, kao i njena aktivacija
+     * Proverava se da li korisnik postoji u bazi,
+     * a zatim se proverava je l' vec postoji clanska karta za tog korisnika
+     * Datum aktivacije se postavlja na trenutni datum
+     *
+     * @param request DTO objekat koji sadrzi ID korisnika za kog se kreira clanska karta
+     * @return ClanskaKartaResponse DTO objekat sa podacima o kreiranoj clanskoj karti i generisanim ID-em u bazi
+     * @throws java.lang.RuntimeException ukoliko korisnik sa prosledjenim ID-em ne postoji, ili vec ima clansku kartu
+     */
     @Transactional
     public ClanskaKartaResponse create(ClanskaKartaRequest request){
         Korisnik k = kRepository.findById(request.korisnikId())

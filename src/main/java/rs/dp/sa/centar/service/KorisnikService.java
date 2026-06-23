@@ -12,13 +12,28 @@ import rs.dp.sa.centar.repository.KorisnikRepository;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Servis klasa koja sadezi logiku za kreiranje novog korisnika
+ * kao i vracanje svih korisnika iz baze preko njegovog repozitorijuma
+ * @author Dusan Petrovic
+ */
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class KorisnikService {
 
+    /**
+     * Repozitorijum za direktnu komunikaciju sa bazom u okviru tabele korisnik
+     */
     private final KorisnikRepository korisnikRepository;
 
+    /**
+     * Kreira novog korisnika sa prosledjenim podacima
+     * Vrsi se provera da li vec postoji prosledjeni email
+     * @param request DTO objekat koji sadrzi podatke za kreiranje novog korisnika(ime, prezime, email, telefon)
+     * @return KorisnikResponse DTO objekat sa sacuvanim podacima i generisanim ID-em
+     * @throws java.lang.RuntimeException ako email vec postoji u bazi, baca se izuzetak
+     */
     @Transactional
     public KorisnikResponse create(KorisnikRequest request) {
         log.info("Kreiranje novog korisnika");
@@ -36,6 +51,11 @@ public class KorisnikService {
         return mapToResponse(korisnikRepository.save(k));
     }
 
+    /**
+     * Pomocna metoda koja mapira entiteski objekat Korisnik u DTO KorisnikResponse objekat
+     * @param k entitet Korisnik koji se mapira
+     * @return KorisnikResponse DTO objekat
+     */
     private KorisnikResponse mapToResponse(Korisnik k){
         return new KorisnikResponse(
                 k.getKorisnikId(),
@@ -46,6 +66,10 @@ public class KorisnikService {
         );
     }
 
+    /**
+     * Vraca listu svih korisnika iz baze mapiranih u DTO objekte KorisnikResponse
+     * @return
+     */
     @org.springframework.transaction.annotation.Transactional(readOnly = true)
     public List<KorisnikResponse> findAll(){
         return korisnikRepository.findAll().stream().map(this::mapToResponse).collect(Collectors.toList());
