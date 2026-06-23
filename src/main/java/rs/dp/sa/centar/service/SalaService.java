@@ -14,14 +14,35 @@ import rs.dp.sa.centar.repository.SportskiCentarRepository;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Servis klasa za upravljanje salama
+ * Sadrzi logiku za kreiranje nove sale i pronalazenje svih dostupnih sala iz baze
+ * @author Dusan Petrovic
+ */
 @Slf4j
 @Service
 @AllArgsConstructor
 public class SalaService {
 
+    /**
+     * Repozitorijum za rad sa podacima o salama u bazi podataka
+     */
     private final SalaRepository sRepository;
+    /**
+     * Repozitorijum za rad sa podacima o sportskim centrima u bazi podataka
+     */
     private final SportskiCentarRepository scRepository;
 
+    /**
+     * Kreira novu salu u bazi u odredjenom sportskom centru
+     * Proverava se da li sala sa prosledjenim nazivom vec postoji u sportskom centru
+     * Proverava se da li prosledjeni sportski centar postoji u bazi
+     *
+     * @param request DTO objekat koji sadrzi naziv, cenu po satu, da li je na otvorenom i ID sportskog centra
+     * @return SalaResponse DTO objekat sa podacima o kreiranoj sali i geneirsanim ID-em
+     * @throws java.lang.RuntimeException ukoliko sala sa prosledjenim nazivom u sportskom centru vec postoji
+     * ili ako prosledjeni sportski centar ne postoji u bazi
+     */
     @Transactional
     public SalaResponse create(SalaRequest request){
         if(sRepository.existsByNazivAndSportskiCentarSportskiCentarId(request.naziv(), request.sportskiCentarId())){
@@ -48,6 +69,11 @@ public class SalaService {
         );
     }
 
+    /**
+     * Vraca listu svih sala iz baze mapiranih u DTO objekte
+     *
+     * @return lista SalaResponse DTO objekata sa podacima o svim salama
+     */
     @Transactional(readOnly = true)
     public List<SalaResponse> findAll(){
         return sRepository.findAll().stream()
