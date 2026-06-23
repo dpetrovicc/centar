@@ -13,15 +13,40 @@ import rs.dp.sa.centar.repository.KorisnikRepository;
 import rs.dp.sa.centar.repository.RezervacijaTerminaRepository;
 import rs.dp.sa.centar.repository.SportskiCentarRepository;
 
+/**
+ * Servis klasa za upravljanje rezervacijama termina u sportskom centru
+ * Sadrzi logiku za kreiranje, pronalazenje i otkaz rezervacija
+ *
+ * @author Dusan Petrovic
+ */
 @Service
 @Slf4j
 @RequiredArgsConstructor
 public class RezervacijaTerminaService {
 
+    /**
+     * Repozitorijum za rad sa podacima o korisnicima
+     */
     private final KorisnikRepository kRepository;
+    /**
+     * Repozitorijum za rad sa podacima o sportskim centrima
+     */
     private final SportskiCentarRepository scRepository;
+    /**
+     * Repozitorijum za rad sa podacima o rezervacijama
+     */
     private final RezervacijaTerminaRepository rtRepository;
 
+    /**
+     * Kreira novu rezervaciju termina za odredjenog korisnika u odredjenom sportskom centru
+     * Proverava se da li korisnik sa tim ID-em postoji u bazi, kao i sportski centar
+     * Inicijalna cena se postavlja na 0.0, a status odobrenja na NE
+     *
+     * @param request DTO objekat koji sadrzi datum, ID korisnika i ID sportskog centra
+     * @return RezervacijaTerminaResponse DTO objekat sa podacima o kreiranoj rezervaciji
+     * @throws java.lang.RuntimeException ukoliko korisnik sa prosledjenim ID-em ne postoji u bazi,
+     * ili ukoliko sportski centar sa prosledjenim ID-em ne postoji u bazi
+     */
     @Transactional
     public RezervacijaTerminaResponse create(RezervacijaTerminaRequest request){
         Korisnik k = kRepository.findById(request.korisnikId())
@@ -50,6 +75,13 @@ public class RezervacijaTerminaService {
 
     }
 
+    /**
+     * Pronalazi rezervaciju u bazi na osnovu prosledjenog ID-a
+     *
+     * @param id jedinstveni identifikator trazene rezervacije
+     * @return RezervacijaTerminaResponse DTO objekat sa podacim trazene rezervacije
+     * @throws java.lang.RuntimeException ukoliko rezervacija sa prosledjenim ID-em ne postoji u bazi
+     */
     @Transactional(readOnly = true)
     public RezervacijaTerminaResponse findById(Long id){
 
@@ -68,6 +100,14 @@ public class RezervacijaTerminaService {
 
     }
 
+    /**
+     * Otkazuje postojecu rezervaciju u bazi promenom njenog statusa odobrenja u OTKAZANO
+     * Proverava se da li trazena rezervacija postoji u bazi
+     *
+     * @param id jedinstveni identifikator rezervacije koju je potrebno otkazati
+     * @return RezervacijaTerminaResponse DTO objekat sa ažuriranim statusom OTKAZANO
+     * @throws java.lang.RuntimeException ukoliko rezervacija sa prosledjenim ID-em ne postoji u bazi
+     */
     @Transactional
     public RezervacijaTerminaResponse cancel(Long id){
         RezervacijaTermina rez = rtRepository.findById(id)
