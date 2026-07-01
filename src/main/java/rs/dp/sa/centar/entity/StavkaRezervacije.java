@@ -1,6 +1,8 @@
 package rs.dp.sa.centar.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.*;
 
 /**
@@ -29,6 +31,8 @@ public class StavkaRezervacije {
     /**
      * Cena iznajmljivanja termina izrazena u dinarima
      */
+    @NotNull(message = "Cena stavke ne sme biti null")
+    @Positive(message = "Cena stavke mora biti veca od nule")
     @Column(name = "cena", nullable = false)
     private Double cena;
 
@@ -41,12 +45,15 @@ public class StavkaRezervacije {
     /**
      * Broj sati na koliko ce odredjena sala biti zakupljena
      */
+    @NotNull(message = "Broj sati ne sme biti null")
+    @Positive(message = "Broj sati mora biti veci od nule")
     @Column(name = "broj_sati", nullable = false)
     private Integer brojSati;
 
     /**
      * Rezervacija kojoj stavka pripada
      */
+    @NotNull(message = "Rezervacija termina mora biti dodeljena stavci")
     @ManyToOne
     @JoinColumn(name = "rezervacija_id", nullable = false)
     private RezervacijaTermina rezervacijaTermina;
@@ -54,6 +61,7 @@ public class StavkaRezervacije {
     /**
      * Sala koja ce biti zakupljena
      */
+    @NotNull(message = "Sala mora biti dodeljena stavci")
     @ManyToOne
     @JoinColumn(name = "sala_id", nullable = false)
     private Sala sala;
