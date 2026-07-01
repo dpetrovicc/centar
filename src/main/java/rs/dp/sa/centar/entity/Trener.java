@@ -1,6 +1,8 @@
 package rs.dp.sa.centar.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 /**
@@ -28,24 +30,28 @@ public class Trener {
     /**
      * Ime trenera
      */
+    @NotBlank(message = "Ime trenera ne sme biti prazno")
     @Column(name = "ime", nullable = false)
     private String ime;
 
     /**
      * Prezime trenera
      */
+    @NotBlank(message = "Prezime trenera ne sme biti prazno")
     @Column(name = "prezime", nullable = false)
     private String prezime;
 
     /**
      * Kontakt telefon trenera
      */
+    @NotBlank(message = "Telefon trenera ne sme biti prazan")
     @Column(name = "telefon", nullable = false)
     private String telefon;
 
     /**
      * Sala u kojoj trener radi i vodi treninge
      */
+    @NotNull(message = "Sala mora biti dodeljena treneru")
     @ManyToOne
     @JoinColumn(name = "sala_id", nullable = false)
     private Sala sala;
