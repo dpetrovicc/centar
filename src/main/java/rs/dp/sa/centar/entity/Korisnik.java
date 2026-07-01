@@ -1,6 +1,8 @@
 package rs.dp.sa.centar.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 /**
@@ -28,18 +30,22 @@ public class Korisnik {
     /**
      * Ime korisnika sportskog centra
      */
+    @NotBlank(message = "Ime korisnika ne sme biti prazno")
     @Column(name = "ime", nullable = false)
     private String ime;
 
     /**
      * Prezime korisnika sportskog centra
      */
+    @NotBlank(message = "Prezime korisnika ne sme biti prazno")
     @Column(name = "prezime", nullable = false)
     private String prezime;
 
     /**
      * Email korisnika
      */
+    @NotBlank(message = "Email ne sme biti prazan")
+    @Email(message = "Email mora biti u ispravnom formatu")
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
