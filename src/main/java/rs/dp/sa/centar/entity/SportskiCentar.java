@@ -1,6 +1,7 @@
 package rs.dp.sa.centar.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 /**
@@ -27,18 +28,21 @@ public class SportskiCentar {
     /**
      * Naziv odredjenog sportskog centra
      */
+    @NotBlank(message = "Naziv sportskog centra ne sme biti prazan")
     @Column(name = "naziv")
     private String naziv;
 
     /**
      * Adresa na kojoj se nalazi sportski centar
      */
+    @NotBlank(message = "Adresa sportskog centra ne sme biti prazna")
     @Column(name = "adresa")
     private String adresa;
 
     /**
      * Kontakt telefon centra
      */
+    @NotBlank(message = "Telefon sportskog centra ne sme biti prazan")
     @Column(name = "telefon")
     private String telefon;
 
