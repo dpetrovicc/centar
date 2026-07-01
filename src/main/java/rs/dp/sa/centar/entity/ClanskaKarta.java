@@ -1,6 +1,7 @@
 package rs.dp.sa.centar.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -30,18 +31,21 @@ public class ClanskaKarta {
     /**
      * Datum kada je clanska karta aktivirana
      */
+    @NotNull(message = "Datum aktivacije ne sme biti null")
     @Column(name = "datum_aktivacije", nullable = false)
     private LocalDate datumAktivacije;
 
     /**
      * Datum do kog clanska karta vazi
      */
+    @NotNull(message = "Datum vazenja ne sme biti null")
     @Column(name = "vazi_do", nullable = false)
     private LocalDate vaziDo;
 
     /**
      * Korisnik koji je vlasnik ove clanske karte
      */
+    @NotNull(message = "Korisnik mora biti dodeljen clanskoj karti")
     @OneToOne
     @JoinColumn(name = "korisnik_id", unique = true, nullable = false)
     private Korisnik korisnik;
