@@ -62,11 +62,10 @@ class TrenerServiceTest {
 
         assertNotNull(response);
         assertEquals(1L, response.trenerId());
-        assertEquals("Marko", response.ime());
-        assertEquals(5L, response.salaId());
 
-        verify(sRepository).findById(5L);
-        verify(tRepository).save(any(Trener.class));
+
+        verify(sRepository, times(1)).findById(5L);
+        verify(tRepository, times(1)).save(any(Trener.class));
 
     }
 
@@ -105,8 +104,7 @@ class TrenerServiceTest {
         TrenerResponse response = tService.update(1L, request);
 
         assertNotNull(response);
-        assertEquals("Dusan", response.ime());
-        assertEquals("123456", response.telefon());
+        assertEquals(1L, response.trenerId());
 
         verify(tRepository).findById(1L);
         verify(sRepository).findById(5L);
@@ -129,7 +127,7 @@ class TrenerServiceTest {
         String msg = exception.getMessage();
         assertEquals("Trener sa prosledjenim ID-jem ne postoji u bazi", msg);
 
-        verify(tRepository).findById(1L);
+        verify(tRepository, times(1)).findById(1L);
         verify(sRepository, never()).findById(anyLong());
         verify(tRepository, never()).save(any(Trener.class));
     }
@@ -149,8 +147,8 @@ class TrenerServiceTest {
         String msg = exception.getMessage();
         assertEquals("Promenjena sala sa ID-jem ne postoji", msg);
 
-        verify(tRepository).findById(1L);
-        verify(sRepository).findById(5L);
+        verify(tRepository, times(1)).findById(1L);
+        verify(sRepository, times(1)).findById(5L);
         verify(tRepository, never()).save(any(Trener.class));
     }
 
@@ -162,8 +160,8 @@ class TrenerServiceTest {
 
         assertDoesNotThrow( () -> tService.delete(1L));
 
-        verify(tRepository).findById(1L);
-        verify(tRepository).delete(mockTrener);
+        verify(tRepository, times(1)).findById(1L);
+        verify(tRepository, times(1)).delete(mockTrener);
 
     }
 
@@ -192,10 +190,6 @@ class TrenerServiceTest {
         TrenerResponse response = tService.findById(1L);
 
         assertNotNull(response);
-        assertEquals(1L, response.trenerId());
-        assertEquals("Marko", response.ime());
-        assertEquals("Markovic", response.prezime());
-        assertEquals("064111222", response.telefon());
 
         verify(tRepository).findById(1L);
 

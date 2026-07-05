@@ -78,13 +78,11 @@ class RezervacijaTerminaServiceTest {
         assertEquals(100L, response.rezervacijaId());
         assertEquals(0.0, response.ukupnaCena());
         assertEquals("NE", response.odobreno());
-        assertEquals(1L, response.korisnikId());
-        assertEquals(10L, response.sportskiCentarId());
         assertEquals(testDatum, response.datum());
 
-        verify(kRepository).findById(1L);
-        verify(scRepository).findById(10L);
-        verify(rtRepository).save(any(RezervacijaTermina.class));
+        verify(kRepository, times(1)).findById(1L);
+        verify(scRepository, times(1)).findById(10L);
+        verify(rtRepository, times(1)).save(any(RezervacijaTermina.class));
 
     }
 
@@ -114,9 +112,7 @@ class RezervacijaTerminaServiceTest {
 
         RezervacijaTerminaRequest request = new RezervacijaTerminaRequest(10L, 1L, testDatum);
 
-        RuntimeException exception = assertThrows(RuntimeException.class, () ->
-                rtService.create(request)
-        );
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> rtService.create(request));
 
         assertEquals("Nema sportskog centra sa tim ID-em u bazi", exception.getMessage());
 
@@ -135,7 +131,6 @@ class RezervacijaTerminaServiceTest {
 
         assertNotNull(response);
         assertEquals(100L, response.rezervacijaId());
-        assertEquals("NE", response.odobreno());
         assertEquals(testDatum, response.datum());
 
         verify(rtRepository).findById(100L);

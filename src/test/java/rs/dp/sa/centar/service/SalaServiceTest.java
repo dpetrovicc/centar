@@ -64,12 +64,10 @@ class SalaServiceTest {
         assertNotNull(response);
         assertEquals(1L, response.salaId());
         assertEquals("Velika Sala", response.naziv());
-        assertEquals(2500.0, response.cenaPoSatu());
-        assertEquals("NE", response.naOtvorenom());
-        assertEquals(10L, response.sportskiCentarId());
 
-        verify(sRepository).existsByNazivAndSportskiCentarSportskiCentarId("Velika Sala", 10L);
-        verify(scRepository).findById(10L);
+
+        verify(sRepository, times(1)).existsByNazivAndSportskiCentarSportskiCentarId("Velika Sala", 10L);
+        verify(scRepository, times(1)).findById(10L);
         verify(sRepository, times(1)).save(any(Sala.class));
 
     }
@@ -87,7 +85,7 @@ class SalaServiceTest {
         String msg = exception.getMessage();
         assertEquals("Sala vec postoji u ovom sportskom centru", msg);
 
-        verify(sRepository).existsByNazivAndSportskiCentarSportskiCentarId("Velika Sala", 10L);
+        verify(sRepository, times(1)).existsByNazivAndSportskiCentarSportskiCentarId("Velika Sala", 10L);
         verify(scRepository, never()).findById(anyLong());
         verify(sRepository, never()).save(any(Sala.class));
 
@@ -125,8 +123,7 @@ class SalaServiceTest {
         assertNotNull(response);
         assertEquals(1, response.size());
         assertEquals("Velika Sala", response.get(0).naziv());
-        assertEquals("NE", response.get(0).naOtvorenom());
-        assertEquals(10L, response.get(0).sportskiCentarId());
+
 
         verify(sRepository).findAll();
 

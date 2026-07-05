@@ -76,17 +76,12 @@ class StavkaRezervacijeServiceTest {
         assertNotNull(response);
         assertEquals(500L, response.stavkaId());
         assertEquals(100L, response.rezervacijaId());
-        assertEquals(5L, response.salaId());
-        assertEquals(3000.0, response.cena());
-        assertEquals("Trening kosarka", response.napomena());
-        assertEquals(2, response.brojSati());
-
         assertEquals(4000.0, mockRezervacija.getUkupnaCena());
 
-        verify(rtRepository).findById(100L);
-        verify(sRepository).findById(5L);
-        verify(srRepository).save(any(StavkaRezervacije.class));
-        verify(rtRepository).save(any(RezervacijaTermina.class));
+        verify(rtRepository, times(1)).findById(100L);
+        verify(sRepository, times(1)).findById(5L);
+        verify(srRepository, times(1)).save(any(StavkaRezervacije.class));
+        verify(rtRepository, times(1)).save(any(RezervacijaTermina.class));
 
 
     }

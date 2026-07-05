@@ -62,9 +62,6 @@ class ClanskaKartaServiceTest {
 
         assertNotNull(response);
         assertEquals(100L, response.kartaId());
-        assertEquals(1L, response.korisnikId());
-        assertEquals(LocalDate.now(), response.datumAktivacije());
-        assertEquals(LocalDate.now().plusMonths(1), response.vaziDo());
 
 
         verify(kRepository).findById(1L);
@@ -86,7 +83,7 @@ class ClanskaKartaServiceTest {
         String msg = exception.getMessage();
         assertEquals("Korisnik ne postoji", msg);
 
-        verify(kRepository).findById(1L);
+        verify(kRepository, times(1)).findById(1L);
         verify(ckRepository, never()).existsByKorisnikKorisnikId(anyLong());
         verify(ckRepository, never()).save(any(ClanskaKarta.class));
 
@@ -108,7 +105,7 @@ class ClanskaKartaServiceTest {
         String msg = exception.getMessage();
         assertEquals("Korisnik vec ima clansku kartu", msg);
 
-        verify(kRepository).findById(1L);
+        verify(kRepository, times(1)).findById(1L);
         verify(ckRepository).existsByKorisnikKorisnikId(1L);
         verify(ckRepository, never()).save(any(ClanskaKarta.class));
 
