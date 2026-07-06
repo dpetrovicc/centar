@@ -31,6 +31,7 @@ public class RezervacijaTermina {
 
     /**
      * Datum odrzavanja rezervisanog termina
+     * Nedozvoljene vrednosti: Vrednost ne sme biti null
      */
     @NotNull(message = "Datum rezervacije ne sme biti null")
     @Column(name = "datum", nullable = false)
@@ -38,6 +39,7 @@ public class RezervacijaTermina {
 
     /**
      * Suma svih stavki rezervacija izrazena u dinarima
+     * Nedozvoljene vrednosti: Vrednost ne sme biti null, niti manja od nule
      */
     @NotNull(message = "Ukupna cena ne sme biti null")
     @PositiveOrZero(message = "Ukupna cena mora biti veca ili jednaka nuli")
@@ -46,6 +48,7 @@ public class RezervacijaTermina {
 
     /**
      * Status rezervacije DA/NE
+     * Nedozvoljene vrednosti: Vrednost ne sme biti null, prazan string, niti sadrzati samo prazne znakove
      */
     @NotBlank(message = "Status odobrenja ne sme biti prazan")
     @Column(name = "odobreno", nullable = false)
@@ -53,6 +56,7 @@ public class RezervacijaTermina {
 
     /**
      * Korisnik na kog glasi rezervacija
+     * Nedozvoljene vrednosti: Vrednost ne sme biti null
      */
     @NotNull(message = "Korisnik mora biti dodeljen rezervaciji")
     @ManyToOne
@@ -61,6 +65,7 @@ public class RezervacijaTermina {
 
     /**
      * Sportski centar na koji se odnosi rezervacija
+     * Nedozvoljene vrednosti: Vrednost ne sme biti null
      */
     @NotNull(message = "Sportski centar mora biti dodeljen rezervaciji")
     @ManyToOne

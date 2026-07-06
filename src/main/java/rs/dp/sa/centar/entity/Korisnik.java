@@ -29,6 +29,7 @@ public class Korisnik {
 
     /**
      * Ime korisnika sportskog centra
+     * Nedozvoljene vrednosti: Vrednost ne sme biti null, prazan string,  niti sadrzati samo prazne znakove
      */
     @NotBlank(message = "Ime korisnika ne sme biti prazno")
     @Column(name = "ime", nullable = false)
@@ -36,6 +37,7 @@ public class Korisnik {
 
     /**
      * Prezime korisnika sportskog centra
+     * Nedozvoljene vrednosti: Vrednost ne sme biti null, prazan string,  niti sadrzati samo prazne znakove
      */
     @NotBlank(message = "Prezime korisnika ne sme biti prazno")
     @Column(name = "prezime", nullable = false)
@@ -43,6 +45,8 @@ public class Korisnik {
 
     /**
      * Email korisnika
+     * Nedozvoljene vrednosti: Vrednost ne sme biti null, prazan string,  niti sadrzati samo prazne znakove
+     * Vrednost mora pratiti ispravan email format
      */
     @NotBlank(message = "Email ne sme biti prazan")
     @Email(message = "Email mora biti u ispravnom formatu")

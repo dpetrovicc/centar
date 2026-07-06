@@ -32,6 +32,7 @@ public class Racun {
 
     /**
      * Datum kada je racun izdat
+     * Nedozvoljene vrednosti: Vrednost ne sme biti null
      */
     @NotNull(message = "Datum izdavanja racuna ne sme biti null")
     @Column(name = "datum_izdavanja", nullable = false)
@@ -39,6 +40,7 @@ public class Racun {
 
     /**
      * Ukupan iznos rezervacije izrazen u dinarima
+     * Nedozvoljene vrednosti: Vrednost ne sme biti null, niti manja od nule
      */
     @NotNull(message = "Ukupan iznos racuna ne sme biti null")
     @PositiveOrZero(message = "Ukupan iznos mora biti veci ili jednak nuli")
@@ -47,6 +49,7 @@ public class Racun {
 
     /**
      * Status da li je racun placen ili nije
+     * Nedozvoljene vrednosti: Vrednost ne sme biti null, prazan string, niti sadrzati samo prazne znakove
      */
     @NotBlank(message = "Status placanja ne sme biti prazan")
     @Column(name = "status_placanja", nullable = false)
@@ -54,6 +57,7 @@ public class Racun {
 
     /**
      * Rezervacija na koju se racun odnosi
+     * Nedozvoljene vrednosti: Vrednost ne sme biti null
      */
     @NotNull(message = "Rezervacija termina mora biti dodeljena racunu")
     @OneToOne

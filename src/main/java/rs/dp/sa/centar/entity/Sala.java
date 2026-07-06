@@ -29,6 +29,7 @@ public class Sala {
 
     /**
      * Naziv sale u sportskom centru
+     * Nedozvoljene vrednosti: Vrednost ne sme biti null, prazan string, niti sadrzati samo prazne znakove
      */
     @NotBlank(message = "Naziv sale ne sme biti prazan")
     @Column(name = "naziv")
@@ -36,6 +37,7 @@ public class Sala {
 
     /**
      * Da li je sala na otvorenom ili ne
+     * Nedozvoljene vrednosti: Vrednost ne sme biti null, prazan string, niti sadrzati samo prazne znakove
      */
     @NotBlank(message = "Polje na otvorenom ne sme biti prazno")
     @Column(name = "na_otvorenom")
@@ -43,6 +45,7 @@ public class Sala {
 
     /**
      * Cena koriscenja sale po satu izrazena u dinarima
+     * Nedozvoljene vrednosti: Vrednost ne sme biti null, niti manja od 1
      */
     @NotNull(message = "Cena po satu mora biti uneta")
     @Min(value = 1, message = "Cena po satu mora biti najmanje 1")
@@ -51,6 +54,7 @@ public class Sala {
 
     /**
      * Sportski centar u kom se sala nalazi
+     * Nedozvoljene vrednosti: Vrednost ne sme biti null
      */
     @NotNull(message = "Sportski centar mora biti dodeljen sali")
     @ManyToOne

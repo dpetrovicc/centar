@@ -27,6 +27,7 @@ public class SportskiCentar {
 
     /**
      * Naziv odredjenog sportskog centra
+     * Nedozvoljene vrednosti: Vrednost ne sme biti null, prazan string, niti sadrzati samo prazne znakove
      */
     @NotBlank(message = "Naziv sportskog centra ne sme biti prazan")
     @Column(name = "naziv")
@@ -34,6 +35,7 @@ public class SportskiCentar {
 
     /**
      * Adresa na kojoj se nalazi sportski centar
+     * Nedozvoljene vrednosti: Vrednost ne sme biti null, prazan string, niti sadrzati samo prazne znakove
      */
     @NotBlank(message = "Adresa sportskog centra ne sme biti prazna")
     @Column(name = "adresa")
@@ -41,6 +43,7 @@ public class SportskiCentar {
 
     /**
      * Kontakt telefon centra
+     * Nedozvoljene vrednosti: Vrednost ne sme biti null, prazan string, niti sadrzati samo prazne znakove
      */
     @NotBlank(message = "Telefon sportskog centra ne sme biti prazan")
     @Column(name = "telefon")

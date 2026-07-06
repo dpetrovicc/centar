@@ -29,6 +29,7 @@ public class Trener {
 
     /**
      * Ime trenera
+     * Nedozvoljene vrednosti: Vrednost ne sme biti null, prazan string, niti sadrzati samo prazne znakove
      */
     @NotBlank(message = "Ime trenera ne sme biti prazno")
     @Column(name = "ime", nullable = false)
@@ -36,6 +37,7 @@ public class Trener {
 
     /**
      * Prezime trenera
+     * Nedozvoljene vrednosti: Vrednost ne sme biti null, prazan string, niti sadrzati samo prazne znakove
      */
     @NotBlank(message = "Prezime trenera ne sme biti prazno")
     @Column(name = "prezime", nullable = false)
@@ -43,6 +45,7 @@ public class Trener {
 
     /**
      * Kontakt telefon trenera
+     * Nedozvoljene vrednosti: Vrednost ne sme biti null, prazan string, niti sadrzati samo prazne znakove
      */
     @NotBlank(message = "Telefon trenera ne sme biti prazan")
     @Column(name = "telefon", nullable = false)
@@ -50,6 +53,7 @@ public class Trener {
 
     /**
      * Sala u kojoj trener radi i vodi treninge
+     * Nedozvoljene vrednosti: Vrednost ne sme biti null
      */
     @NotNull(message = "Sala mora biti dodeljena treneru")
     @ManyToOne

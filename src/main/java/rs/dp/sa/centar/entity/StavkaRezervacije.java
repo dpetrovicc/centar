@@ -30,6 +30,7 @@ public class StavkaRezervacije {
 
     /**
      * Cena iznajmljivanja termina izrazena u dinarima
+     * Nedozvoljene vrednosti: Vrednost ne sme biti null, nula niti negativna (mora biti veca od nule)
      */
     @NotNull(message = "Cena stavke ne sme biti null")
     @Positive(message = "Cena stavke mora biti veca od nule")
@@ -44,6 +45,7 @@ public class StavkaRezervacije {
 
     /**
      * Broj sati na koliko ce odredjena sala biti zakupljena
+     * Nedozvoljene vrednosti: Vrednost ne sme biti null, nula niti negativna (mora biti veci od nule)
      */
     @NotNull(message = "Broj sati ne sme biti null")
     @Positive(message = "Broj sati mora biti veci od nule")
@@ -52,6 +54,7 @@ public class StavkaRezervacije {
 
     /**
      * Rezervacija kojoj stavka pripada
+     * Nedozvoljene vrednosti: Vrednost ne sme biti null
      */
     @NotNull(message = "Rezervacija termina mora biti dodeljena stavci")
     @ManyToOne
@@ -60,6 +63,7 @@ public class StavkaRezervacije {
 
     /**
      * Sala koja ce biti zakupljena
+     * Nedozvoljene vrednosti: Vrednost ne sme biti null
      */
     @NotNull(message = "Sala mora biti dodeljena stavci")
     @ManyToOne

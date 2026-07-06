@@ -30,6 +30,7 @@ public class ClanskaKarta {
 
     /**
      * Datum kada je clanska karta aktivirana
+     * Nedozvoljene vrednosti: Vrednost ne sme biti null
      */
     @NotNull(message = "Datum aktivacije ne sme biti null")
     @Column(name = "datum_aktivacije", nullable = false)
@@ -37,6 +38,7 @@ public class ClanskaKarta {
 
     /**
      * Datum do kog clanska karta vazi
+     * Nedozvoljene vrednosti: Vrednost ne sme biti null
      */
     @NotNull(message = "Datum vazenja ne sme biti null")
     @Column(name = "vazi_do", nullable = false)
@@ -44,6 +46,7 @@ public class ClanskaKarta {
 
     /**
      * Korisnik koji je vlasnik ove clanske karte
+     * Nedozvoljene vrednosti: Vrednost ne sme biti null
      */
     @NotNull(message = "Korisnik mora biti dodeljen clanskoj karti")
     @OneToOne
