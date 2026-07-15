@@ -14,7 +14,7 @@ import rs.dp.sa.centar.entity.RezervacijaTermina;
 import rs.dp.sa.centar.repository.RacunRepository;
 import rs.dp.sa.centar.repository.RezervacijaTerminaRepository;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -33,7 +33,6 @@ class RacunServiceTest {
 
     private Racun mockRacun;
     private RezervacijaTermina mockRezervacija;
-    private Date testDatum;
 
     @BeforeEach
     void setUp() {
@@ -41,12 +40,11 @@ class RacunServiceTest {
         mockRezervacija.setRezervacijaId(100L);
         mockRezervacija.setUkupnaCena(4500.0);
 
-        testDatum = new Date();
 
         mockRacun = new Racun();
         mockRacun.setRacunId(1L);
         mockRacun.setRezervacijaTermina(mockRezervacija);
-        mockRacun.setDatumIzdavanja(testDatum);
+        mockRacun.setDatumIzdavanja(LocalDate.now());
         mockRacun.setStatusPlacanja("Nije placeno");
         mockRacun.setUkupanIznos(4500.0);
     }
@@ -62,7 +60,7 @@ class RacunServiceTest {
 
         assertNotNull(response);
         assertEquals(1L, response.racunId());
-        assertEquals(testDatum, response.datumIzdavanja());
+        assertEquals(LocalDate.now(), response.datumIzdavanja());
         assertEquals(100L, response.rezervacijaId());
 
 
