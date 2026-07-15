@@ -7,12 +7,12 @@ import jakarta.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 import java.time.LocalDate;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
 
 class RezervacijaTerminaTest {
 
@@ -26,8 +26,8 @@ class RezervacijaTerminaTest {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
 
-        mockKorisnik = Mockito.mock(Korisnik.class);
-        mockSportskiCentar = Mockito.mock(SportskiCentar.class);
+        mockKorisnik = mock(Korisnik.class);
+        mockSportskiCentar = mock(SportskiCentar.class);
 
     }
 

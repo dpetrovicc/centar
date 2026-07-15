@@ -7,11 +7,11 @@ import jakarta.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
 
 class SalaTest {
 
@@ -23,7 +23,7 @@ class SalaTest {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
 
-        mockSportskiCentar = Mockito.mock(SportskiCentar.class);
+        mockSportskiCentar = mock(SportskiCentar.class);
     }
 
     @Test

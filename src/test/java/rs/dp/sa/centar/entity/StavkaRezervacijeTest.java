@@ -7,11 +7,11 @@ import jakarta.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
 
 class StavkaRezervacijeTest {
 
@@ -24,8 +24,8 @@ class StavkaRezervacijeTest {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
 
-        mockRezervacijaTermina = Mockito.mock(RezervacijaTermina.class);
-        mockSala = Mockito.mock(Sala.class);
+        mockRezervacijaTermina = mock(RezervacijaTermina.class);
+        mockSala = mock(Sala.class);
     }
 
     @Test

@@ -7,12 +7,12 @@ import jakarta.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 import java.time.LocalDate;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
 
 class ClanskaKartaTest {
 
@@ -24,7 +24,7 @@ class ClanskaKartaTest {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
 
-        mockKorisnik = Mockito.mock(Korisnik.class);
+        mockKorisnik = mock(Korisnik.class);
     }
 
     @Test
