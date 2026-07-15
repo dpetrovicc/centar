@@ -9,7 +9,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -30,7 +30,7 @@ class RacunTest {
     @Test
     void getUkupanIznos() {
 
-        Racun r = new Racun(null, new Date(), 5000.0, "PLACENO", mockRezervacijaTermina);
+        Racun r = new Racun(null, LocalDate.now(), 5000.0, "PLACENO", mockRezervacijaTermina);
         assertEquals(5000.0, r.getUkupanIznos());
     }
 
@@ -44,7 +44,7 @@ class RacunTest {
     @Test
     @DisplayName("Validacija treba da prodje za ispravan racun")
     void validate_ValidRacun_NoViolations(){
-        Racun r = new Racun(null, new Date(), 5000.0, "PLACENO", mockRezervacijaTermina);
+        Racun r = new Racun(null, LocalDate.now(), 5000.0, "PLACENO", mockRezervacijaTermina);
 
         Set<ConstraintViolation<Racun>> violations = validator.validate(r);
 
@@ -70,7 +70,7 @@ class RacunTest {
     @Test
     @DisplayName("Validacija treba da failuje kada je ukupan iznos null")
     void validate_NullUkupanIznos_FailsValidation() {
-        Racun r = new Racun(null, new Date(), null, "PLACENO", mockRezervacijaTermina);
+        Racun r = new Racun(null, LocalDate.now(), null, "PLACENO", mockRezervacijaTermina);
 
         Set<ConstraintViolation<Racun>> violations = validator.validate(r);
         assertFalse(violations.isEmpty(), "Neuspesno, null iznos je prosao");
@@ -83,7 +83,7 @@ class RacunTest {
     @Test
     @DisplayName("Validacija treba da failuje kada je iznos negativan")
     void validate_NegativeUkupanIznos_FailsValidation() {
-        Racun r = new Racun(null, new Date(), -5000.0, "PLACENO", mockRezervacijaTermina);
+        Racun r = new Racun(null, LocalDate.now(), -5000.0, "PLACENO", mockRezervacijaTermina);
 
         Set<ConstraintViolation<Racun>> violations = validator.validate(r);
         assertFalse(violations.isEmpty(), "Neuspesno, negativan iznos je prosao");
@@ -96,7 +96,7 @@ class RacunTest {
     @Test
     @DisplayName("Validacija treba da failuje kada je status placanja prazan")
     void validate_BlankStatusPlacanja_FailsValidation() {
-        Racun r = new Racun(null, new Date(), 5000.0, "  ", mockRezervacijaTermina);
+        Racun r = new Racun(null, LocalDate.now(), 5000.0, "  ", mockRezervacijaTermina);
 
         Set<ConstraintViolation<Racun>> violations = validator.validate(r);
         assertFalse(violations.isEmpty(), "Neuspesno, prazan status placanja je prosao");
@@ -109,7 +109,7 @@ class RacunTest {
     @Test
     @DisplayName("Validacija treba da failuje kada je RezervacijaTermina null")
     void validate_NullRezervacijaTermina_FailsValidation() {
-        Racun r = new Racun(null, new Date(), 5000.0, "PLACENO", null);
+        Racun r = new Racun(null, LocalDate.now(), 5000.0, "PLACENO", null);
 
         Set<ConstraintViolation<Racun>> violations = validator.validate(r);
 
