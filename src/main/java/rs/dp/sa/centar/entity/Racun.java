@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
 import lombok.*;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  * Predstavlja fiskalni racun koji se kreira za rezervaciju sa svim terminima, i izracunatim ukupnim iznosom
@@ -36,7 +36,7 @@ public class Racun {
      */
     @NotNull(message = "Datum izdavanja racuna ne sme biti null")
     @Column(name = "datum_izdavanja", nullable = false)
-    private Date datumIzdavanja;
+    private LocalDate datumIzdavanja;
 
     /**
      * Ukupan iznos rezervacije izrazen u dinarima
