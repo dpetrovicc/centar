@@ -12,7 +12,6 @@ import rs.dp.sa.centar.repository.ClanskaKartaRepository;
 import rs.dp.sa.centar.repository.KorisnikRepository;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 /**
  * Servis klasa za upravljanje clanskim kartama
