@@ -1,10 +1,10 @@
 package rs.dp.sa.centar.dto;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public record RacunResponse(
         Long racunId,
-        Date datumIzdavanja,
+        LocalDate datumIzdavanja,
         Double ukupanIznos,
         String statusPlacanja,
         Long rezervacijaId
