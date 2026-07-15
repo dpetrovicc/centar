@@ -1,10 +1,10 @@
 package rs.dp.sa.centar.dto;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public record RezervacijaTerminaResponse(
         Long rezervacijaId,
-        Date datum,
+        LocalDate datum,
         Double ukupnaCena,
         String odobreno,
         Long korisnikId,

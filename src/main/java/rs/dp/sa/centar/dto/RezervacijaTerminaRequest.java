@@ -2,7 +2,7 @@ package rs.dp.sa.centar.dto;
 
 import jakarta.validation.constraints.NotNull;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public record RezervacijaTerminaRequest(
         @NotNull(message = "ID sportskog centra je obavezan")
@@ -10,6 +10,6 @@ public record RezervacijaTerminaRequest(
         @NotNull(message = "ID korisnika je obavezan")
         Long korisnikId,
         @NotNull(message = "Datum je obavezan")
-        Date datum
+        LocalDate datum
 ) {
 }
