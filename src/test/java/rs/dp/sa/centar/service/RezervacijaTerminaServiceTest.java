@@ -17,7 +17,6 @@ import rs.dp.sa.centar.repository.RezervacijaTerminaRepository;
 import rs.dp.sa.centar.repository.SportskiCentarRepository;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -42,7 +41,6 @@ class RezervacijaTerminaServiceTest {
     private Korisnik mockKorisnik;
     private SportskiCentar mockCentar;
     private RezervacijaTermina mockRezervacija;
-    private Date testDatum;
 
     @BeforeEach
     void setUp() {
@@ -52,11 +50,10 @@ class RezervacijaTerminaServiceTest {
         mockCentar = new SportskiCentar();
         mockCentar.setSportskiCentarId(10L);
 
-        testDatum = new Date();
 
         mockRezervacija = new RezervacijaTermina();
         mockRezervacija.setRezervacijaId(100L);
-        mockRezervacija.setDatum(testDatum);
+        mockRezervacija.setDatum(LocalDate.now());
         mockRezervacija.setKorisnik(mockKorisnik);
         mockRezervacija.setSportskiCentar(mockCentar);
         mockRezervacija.setOdobreno("NE");
@@ -71,14 +68,14 @@ class RezervacijaTerminaServiceTest {
         when(rtRepository.save(any(RezervacijaTermina.class))).thenReturn(mockRezervacija);
 
 
-        RezervacijaTerminaRequest request = new RezervacijaTerminaRequest(10L, 1L, testDatum);
+        RezervacijaTerminaRequest request = new RezervacijaTerminaRequest(10L, 1L, LocalDate.now());
         RezervacijaTerminaResponse response = rtService.create(request);
 
         assertNotNull(response);
         assertEquals(100L, response.rezervacijaId());
         assertEquals(0.0, response.ukupnaCena());
         assertEquals("NE", response.odobreno());
-        assertEquals(testDatum, response.datum());
+        assertEquals(LocalDate.now(), response.datum());
 
         verify(kRepository, times(1)).findById(1L);
         verify(scRepository, times(1)).findById(10L);
@@ -91,7 +88,7 @@ class RezervacijaTerminaServiceTest {
     void create_KorisnikNotFound_ThrowsException() {
         when(kRepository.findById(1L)).thenReturn(Optional.empty());
 
-        RezervacijaTerminaRequest request = new RezervacijaTerminaRequest(10L, 1L, testDatum);
+        RezervacijaTerminaRequest request = new RezervacijaTerminaRequest(10L, 1L, LocalDate.now());
 
         RuntimeException exception = assertThrows(RuntimeException.class, () ->
                 rtService.create(request)
@@ -110,7 +107,7 @@ class RezervacijaTerminaServiceTest {
         when(kRepository.findById(1L)).thenReturn(Optional.of(mockKorisnik));
         when(scRepository.findById(10L)).thenReturn(Optional.empty());
 
-        RezervacijaTerminaRequest request = new RezervacijaTerminaRequest(10L, 1L, testDatum);
+        RezervacijaTerminaRequest request = new RezervacijaTerminaRequest(10L, 1L, LocalDate.now());
 
         RuntimeException exception = assertThrows(RuntimeException.class, () -> rtService.create(request));
 
@@ -131,7 +128,7 @@ class RezervacijaTerminaServiceTest {
 
         assertNotNull(response);
         assertEquals(100L, response.rezervacijaId());
-        assertEquals(testDatum, response.datum());
+        assertEquals(LocalDate.now(), response.datum());
 
         verify(rtRepository).findById(100L);
     }
