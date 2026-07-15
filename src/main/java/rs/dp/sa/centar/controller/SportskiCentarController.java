@@ -6,8 +6,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import rs.dp.sa.centar.entity.SportskiCentar;
-import rs.dp.sa.centar.repository.SportskiCentarRepository;
+import rs.dp.sa.centar.dto.SportskiCentarRequest;
+import rs.dp.sa.centar.dto.SportskiCentarResponse;
+import rs.dp.sa.centar.service.SportskiCentarService;
 
 import java.util.List;
 
@@ -17,12 +18,12 @@ import java.util.List;
 @RequestMapping("/api/sportski-centar")
 public class SportskiCentarController {
 
-    private final SportskiCentarRepository scRepository;
+    private final SportskiCentarService sService;
 
     @PostMapping
-    public ResponseEntity<Object> create(@Valid @RequestBody SportskiCentar sc) {
+    public ResponseEntity<Object> create(@Valid @RequestBody SportskiCentarRequest sc) {
         try {
-            SportskiCentar novi = scRepository.save(sc);
+            SportskiCentarResponse novi = sService.create(sc);
             return ResponseEntity.status(HttpStatus.CREATED).body(novi);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
@@ -32,7 +33,7 @@ public class SportskiCentarController {
     @GetMapping
     public ResponseEntity<Object> findAll(){
         try {
-            List<SportskiCentar> scs = scRepository.findAll();
+            List<SportskiCentarResponse> scs = sService.getAll();
             return ResponseEntity.status(HttpStatus.OK).body(scs);
         }catch(Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
