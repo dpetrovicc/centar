@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rs.dp.sa.centar.dto.TrenerRequest;
 import rs.dp.sa.centar.dto.TrenerResponse;
-import rs.dp.sa.centar.repository.TrenerRepository;
 import rs.dp.sa.centar.service.TrenerService;
 
 @RestController

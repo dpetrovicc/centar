@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import rs.dp.sa.centar.dto.ClanskaKartaRequest;
 import rs.dp.sa.centar.dto.ClanskaKartaResponse;
-import rs.dp.sa.centar.entity.Korisnik;
 import rs.dp.sa.centar.service.ClanskaKartaService;
 
 @RestController
