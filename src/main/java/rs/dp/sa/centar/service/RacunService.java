@@ -11,7 +11,7 @@ import rs.dp.sa.centar.entity.RezervacijaTermina;
 import rs.dp.sa.centar.repository.RacunRepository;
 import rs.dp.sa.centar.repository.RezervacijaTerminaRepository;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  * Servis klasa za upravljanje racunima u sportskom centru
@@ -51,7 +51,7 @@ public class RacunService {
 
         Racun rac = new Racun();
         rac.setRezervacijaTermina(rt);
-        rac.setDatumIzdavanja(new Date());
+        rac.setDatumIzdavanja(LocalDate.now());
         rac.setStatusPlacanja("Nije placeno");
         rac.setUkupanIznos(rt.getUkupnaCena());
 
