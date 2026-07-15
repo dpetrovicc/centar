@@ -9,7 +9,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -34,7 +34,7 @@ class RezervacijaTerminaTest {
     @Test
     void getUkupnaCena() {
 
-        RezervacijaTermina rt = new RezervacijaTermina(null, new Date(), 4500.0, "DA", mockKorisnik, mockSportskiCentar);
+        RezervacijaTermina rt = new RezervacijaTermina(null, LocalDate.now(), 4500.0, "DA", mockKorisnik, mockSportskiCentar);
         assertEquals(4500.0, rt.getUkupnaCena());
 
     }
@@ -50,7 +50,7 @@ class RezervacijaTerminaTest {
     @DisplayName("Validacija treba da prodje za ispravnu rezervaciju")
     void validate_ValidRezervacija_NoViolations() {
 
-        RezervacijaTermina rt = new RezervacijaTermina(null, new Date(), 4500.0, "DA", mockKorisnik, mockSportskiCentar);
+        RezervacijaTermina rt = new RezervacijaTermina(null, LocalDate.now(), 4500.0, "DA", mockKorisnik, mockSportskiCentar);
 
         Set<ConstraintViolation<RezervacijaTermina>> violations = validator.validate(rt);
 
@@ -78,7 +78,7 @@ class RezervacijaTerminaTest {
     @Test
     @DisplayName("Validacija treba da failuje kada je cena u minusu")
     void validate_NegativeCena_FailsValidation() {
-        RezervacijaTermina rt = new RezervacijaTermina(null, new Date(), -4500.0, "DA", mockKorisnik, mockSportskiCentar);
+        RezervacijaTermina rt = new RezervacijaTermina(null, LocalDate.now(), -4500.0, "DA", mockKorisnik, mockSportskiCentar);
 
         Set<ConstraintViolation<RezervacijaTermina>> violations = validator.validate(rt);
         assertFalse(violations.isEmpty(), "Neuspesno, negativna cena je prosla");
@@ -91,7 +91,7 @@ class RezervacijaTerminaTest {
     @Test
     @DisplayName("Validacija treba da failuje kada je status odobrenja prazan")
     void validate_BlankOdobreno_FailsValidation() {
-        RezervacijaTermina rt = new RezervacijaTermina(null, new Date(), 4500.0, "   ", mockKorisnik, mockSportskiCentar);
+        RezervacijaTermina rt = new RezervacijaTermina(null, LocalDate.now(), 4500.0, "   ", mockKorisnik, mockSportskiCentar);
 
         Set<ConstraintViolation<RezervacijaTermina>> violations = validator.validate(rt);
         assertFalse(violations.isEmpty(), "Neuspesno, prazan status odobrenja je prosao");
@@ -104,7 +104,7 @@ class RezervacijaTerminaTest {
     @Test
     @DisplayName("Validacija treba da failuje kada je korisnik null")
     void validate_NullKorisnik_FailsValidation(){
-        RezervacijaTermina rt = new RezervacijaTermina(null, new Date(), 4500.0, "DA", null, mockSportskiCentar);
+        RezervacijaTermina rt = new RezervacijaTermina(null, LocalDate.now(), 4500.0, "DA", null, mockSportskiCentar);
 
         Set<ConstraintViolation<RezervacijaTermina>> violations = validator.validate(rt);
         assertFalse(violations.isEmpty(), "Neuspesno, null korisnik je prosao");
@@ -118,7 +118,7 @@ class RezervacijaTerminaTest {
     @Test
     @DisplayName("Validacija treba da failuje kada je sportski centar null")
     void validate_NullSportskiCentar_FailsValidation() {
-        RezervacijaTermina rt = new RezervacijaTermina(null, new Date(), 4500.0, "DA", mockKorisnik, null);
+        RezervacijaTermina rt = new RezervacijaTermina(null, LocalDate.now(), 4500.0, "DA", mockKorisnik, null);
 
         Set<ConstraintViolation<RezervacijaTermina>> violations = validator.validate(rt);
         assertFalse(violations.isEmpty(), "Neuspesno, null sportski centar je prosao");
