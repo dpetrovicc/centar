@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
 import lombok.*;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  * Predstavlja rezervaciju vezanu za odredjeni sportski centar na odredjeni datum i ukupnom cenom rezervisanja termina
@@ -35,7 +35,7 @@ public class RezervacijaTermina {
      */
     @NotNull(message = "Datum rezervacije ne sme biti null")
     @Column(name = "datum", nullable = false)
-    private Date datum;
+    private LocalDate datum;
 
     /**
      * Suma svih stavki rezervacija izrazena u dinarima
